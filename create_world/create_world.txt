@@ -1,0 +1,177 @@
+CreateWorld World;
+
+void setup()
+{
+  size(300,275);
+  background(12,160,232);
+  
+  World=new CreateWorld();
+  
+  World.Create();
+}
+
+void draw()
+{
+  
+}
+
+
+class CreateWorld
+{
+  PrintWriter saveFile;
+
+  int biomes;
+  int terrainCreator;
+  
+  int startXPos;
+  int startYPos;
+  
+  int cavesXPos;
+  int cavesYPos;
+
+  int monsterXPos;
+  int monsterYPos;
+
+  int isNight;
+
+  int musicCreator;
+
+  int randomNum;
+  
+  
+  CreateWorld()
+  {
+    
+  }
+  
+  void Create()
+  {
+    saveFile=createWriter("save_file.teg");
+    
+    saveFile.println("The Exploring Game Save File. Modification not really recommended. :(");
+      saveFile.println("########");
+      
+      for(int i=0; i<8; i++)
+      {
+        biomes=int(random(7));
+        saveFile.println(biomes);
+        biomes=0;
+      }
+      
+      saveFile.println("########");
+      
+      terrainCreator=int(random(9));
+      saveFile.println(terrainCreator);
+      
+      saveFile.println("########");
+      
+      for(int x=0; x<16; x++)
+      {
+        monsterXPos=int(random(2000));
+        monsterYPos=int(random(2000));
+        saveFile.println(monsterXPos);
+        saveFile.println(monsterYPos);
+        monsterXPos=0;
+        monsterYPos=0;
+      }
+      
+      saveFile.println("########");
+      
+      for(int y=0; y<6; y++)
+      {
+        cavesXPos=int(random(2000));
+        cavesYPos=int(random(2000));
+        saveFile.println(cavesXPos);
+        saveFile.println(cavesYPos);
+        cavesXPos=0;
+        cavesYPos=0;
+      }
+      
+      saveFile.println("########");
+      
+      isNight=int(random(1));
+      saveFile.println(isNight);
+      
+      saveFile.println("########");
+      
+      musicCreator=int(random(8));
+      saveFile.println(musicCreator);
+      
+      
+      saveFile.flush();
+      saveFile.close();
+      
+      background(12,45,245);
+      delay(1000);
+      exit();  
+  }
+}
+
+
+############################################################################
+
+
+CreateWorld World;
+
+int arrayWidth=300;
+int arrayHeight=298;
+
+int[][] map;
+
+void setup()
+{
+  size(300,250);
+  background(12,160,232);
+  
+  map=new int[arrayWidth][arrayHeight];
+  
+  World=new CreateWorld();
+  
+  World.Create();
+}
+
+void draw()
+{
+  
+}
+
+class CreateWorld
+{
+  PrintWriter saveFile;
+  
+  CreateWorld()
+  {
+    
+  }
+  
+  void Create()
+  {
+    int newLine=0;
+    
+    saveFile=createWriter("game.txt");
+    
+    for(int a=0; a<arrayWidth; a++)
+    {
+      for(int b=0; b<arrayHeight; b++)
+      {
+        map[a][b]=int(random(12));
+        saveFile.print(map[a][b]+" ");
+        newLine++;
+        
+        if(newLine==arrayWidth-1)
+        {
+          map[a][b]=int(random(12));
+          saveFile.println(map[a][b]+" ");
+          newLine=0;
+        }
+      }
+    }
+  
+    saveFile.flush();
+    saveFile.close();
+  
+    exit();
+  }
+}
+
+ 

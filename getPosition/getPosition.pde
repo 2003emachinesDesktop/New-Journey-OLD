@@ -1,0 +1,104 @@
+
+int[][] pos;
+
+int size=50;
+
+void setup()
+{
+  size(200,200);
+  background(75);
+  
+  pos=new int[3][3];
+  
+  for(int x=0; x<pos.length; x++)
+  {
+    for(int y=0; y<pos.length; y++)
+    {
+      pos[x][y]=int(random(4));
+      println(pos[x][y]);
+    }
+  }
+  println("####");
+}
+
+void draw()
+{
+  for(int x=0; x<pos.length; x++)
+  {
+    for(int y=0; y<pos.length; y++)
+    {
+      if(pos[x][y]==0)
+      {
+        fill(0,0,127);
+        rect(x*size,y*size,size,size);
+  
+        if(mousePressed==true)
+        {
+          if(mouseX>x*size && mouseX<x*size+size)
+          {
+            if(mouseY>y*size && mouseY<y*size+size)
+            {
+             println("working");
+             println(pos[x][y]);
+            }
+          }
+        }   
+      }
+      if(pos[x][y]==1)
+      {
+        fill(0,127,0);
+        rect(x*size,y*size,size,size);
+  
+        if(mousePressed==true)
+        {
+          if(mouseX>x*size && mouseX<x*size+size)
+          {
+            if(mouseY>y*size && mouseY<y*size+size)
+            {
+             println("working");
+             println(pos[x][y]);
+            }
+          }
+        }
+      }
+      if(pos[x][y]==2)
+      {
+        fill(127,0,0);
+        rect(x*size,y*size,size,size);
+  
+        if(mousePressed==true)
+        {
+          if(mouseX>x*size && mouseX<x*size+size)
+          {
+            if(mouseY>y*size && mouseY<y*size+size)
+            {
+             println("working");
+             println(pos[x][y]);
+            }
+          }
+        }
+      }
+      if(pos[x][y]==3)
+      {
+        fill(127,0,127);
+        rect(x*size,y*size,size,size);
+  
+        if(mousePressed==true)
+        {
+          if(mouseX>x*size && mouseX<x*size+size)
+          {
+            if(mouseY>y*size && mouseY<y*size+size)
+            {
+             println("working");
+             println(pos[x][y]);
+            }
+          }
+        }
+      }
+      
+    }
+  }
+  mousePressed=false;
+}
+
+  
