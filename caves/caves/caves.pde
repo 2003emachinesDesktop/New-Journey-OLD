@@ -1,118 +1,150 @@
 
-PImage caveMap;
+int posX=20;
+int posY=20;
+
+int size=100;
+
+int x=75;
+int y=75;
+
+int oldx=x;
+int oldy=y;
 
 boolean collision=false;
 
-int size=40;
+String[] saveFile;
 
-int x=20;
-int y=20;
+boolean run=true;
 
-int oldX=x;
-int oldY=y;
-
-color colour1=color(18,18,18);
+Genorator NewCave;
 
 
 void setup()
 {
-  size(1000,600);
-  background(0);
+  size(700,700);
+  frameRate(30);
   
-  caveMap=loadImage("cave.png");
+  saveFile=loadStrings("/home/pi/Desktop/saveFile.txt");
+  
+  collision=false;
+  
+  NewCave=new Genorator();
+  
+  fill(75);
+  strokeWeight(0);
+  noStroke();
 }
 
 
 void draw()
 {
-  background(caveMap);
-  
-  noStroke();
-  fill(50);
-  rect(x,y,size,size);
-  
-  println(x+" ; "+y);
-  
-  if(collision==true)
+  if(keyPressed==true)
   {
-    println("Collision");
-    
-    if(x>oldX)
+    if(collision==false)
     {
-      oldX=x;
-    }
-    if(y>oldY)
-    {
-      oldY=y;
-    }
-    collision=false;
-  }
-  
-  
-  if(collision==false)
-  {
-    oldX=x;
-    oldY=y;
-    
-    if(keyPressed==true)
-    {
-      if(key=='w')
-      {
-        y-=5;
-        oldY=y;
-      }
-      if(key=='s')
-      {
-        y+=5;
-        oldY=y;
-      }
       if(key=='a')
       {
-        x-=5;
-        oldX=x;
+        x--;
       }
       if(key=='d')
       {
-        x+=5;
-        oldX=x;
+        x++;
+      }
+      if(key=='w')
+      {
+        y--;
+      }
+      if(key=='s')
+      {
+        y++;
+      }
+      
+      oldx=x;
+      oldy=y;
+    }
+  }
+  
+  
+  if(run==true)
+  {
+    background(127);
+    
+    for(String i: saveFile)
+    {
+      fill(75);
+      
+      if(i.equals("0"))
+      {
+        rect(posX,posY,size,size);
+        
+        
+        posX+=size;
+        posY+=size/2-size/10;
+      }
+      
+      if(i.equals("1"))
+      {
+        rect(posX,posY,size,size/5);
+      
+      
+        posX+=size;
+      }  
+      
+      if(i.equals("2"))
+      {
+        rect(posX,posY,size/5,size);
+        
+        
+        posY+=size;
+      }
+      if(i.equals("3"))
+      {
+        rect(posX,posY-size/2,size,size/5);
+       
+        
+        posX+=size;
+        posY-=size/2;
+      }
+      
+      if(i.equals("4"))
+      {
+        rect(posX-size,posY,size,size/5);
+        
+        
+        posX-=size;
+        posY-=size/2;
+      }
+      
+      if(i.equals("5"))
+      {
+        rect(posX-size/2,posY+size/5,size/5,size);
+        
+        
+        posX-=size/2;
+        posY+=size;
+      }
+      
+      if(i.equals("6"))
+      {
+        rect(posX-size/2,posY-size,size/5,size);
+       
+        
+        posX-=size/2;
+        posY-=size;
       }
     }
+    
+    posX=20;
+    posY=20;
   }
   
   
-  color colour2=get(x,y);
-  color colour3=get(x+size,y);
-  color colour4=get(x,y+size);
-  color colour5=get(x+size,y+size);
   
-  if(colour2==colour1 || colour3==colour1 || colour4==colour1 || colour5==colour1)
-  {
-    //collision=true;
-    
-    println("Collision Detected");
-    
-    
-    if((key=='w') && (colour2==colour1 || colour3==colour1))
+    if(mousePressed==true)
     {
-       collision=true;
-       y+=5;
+      NewCave.CreateCave();
     }
-    if((key=='s') && (colour4==colour1 || colour5==colour1))
-    {
-       collision=true;
-       y-=5;
-    }
-    if((key=='a') && (colour2==colour1 || colour4==colour1))
-    {
-       collision=true;
-       x+=5;
-    }
-    if((key=='d') && (colour3==colour1 || colour5==colour1))
-    {
-       collision=true;
-       x-=5;
-    }
-   
-  }
+  
+    fill(0);
+    rect(x,y,size/10,size/10);
 }
-  
