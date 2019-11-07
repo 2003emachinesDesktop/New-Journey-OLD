@@ -1,4 +1,3 @@
-
 int posX=20;
 int posY=20;
 
@@ -16,6 +15,7 @@ boolean run=true;
 boolean collision=false;
 
 color colour1=color(18);
+color colour6=color(65);
 
 Genorator NewCave;
 
@@ -42,7 +42,7 @@ void draw()
 {
   background(colour1);
   
-  println(x+" ; "+y);
+  //println(x+" ; "+y);
   
   
   if(collision==true)
@@ -94,10 +94,12 @@ void draw()
   {
     for(String i: saveFile)
     {
-      fill(75);
+      //fill(75);
       
       if(i.equals("0"))
       {
+        fill(65);
+        
         rect(posX,posY,size,size);
         
         posX+=size;
@@ -106,6 +108,8 @@ void draw()
       
       if(i.equals("1"))
       {
+        fill(75);
+        
         rect(posX,posY,size,size/5);
         
         posX+=size;
@@ -113,6 +117,8 @@ void draw()
       
       if(i.equals("2"))
       {
+        fill(75);
+        
         rect(posX,posY,size/5,size);
         
         posY+=size;
@@ -120,6 +126,8 @@ void draw()
       
       if(i.equals("3"))
       {
+        fill(75);
+        
         rect(posX,posY-size/2,size,size/5);
         
         posX+=size;
@@ -128,6 +136,8 @@ void draw()
       
       if(i.equals("4"))
       {
+        fill(75);
+        
         rect(posX-size,posY,size,size/5);
         
         posX-=size;
@@ -136,6 +146,8 @@ void draw()
       
       if(i.equals("5"))
       {
+        fill(75);
+        
         rect(posX-size/2,posY+size/5,size/5,size);
         
         posX-=size/2;
@@ -144,6 +156,8 @@ void draw()
       
       if(i.equals("6"))
       {
+        fill(75);
+        
         rect(posX-size/2,posY-size,size/5,size);
         
         posX-=size/2;
@@ -181,9 +195,18 @@ void draw()
          x-=5;
       }
      }
+     
+     if(colour2==colour6 || colour3==colour6 || colour4==colour6 ||colour5==colour6)
+     {
+       if((key=='a') && (colour2==colour1 || colour5==colour1))
+       {
+         println("exit");
+         exit();
+       }
+     }
     
     
-      posX=20;
+     posX=20;
      posY=20;
     
     
@@ -194,7 +217,4 @@ void draw()
     {
       NewCave.CreateCave();
     }
-  }
-
-
-  
+}
