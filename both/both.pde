@@ -1,6 +1,7 @@
 
 GameWorld World;
 Sprite Player;
+Caves Cave;
 
 Monsters[] monsters=new Monsters[128];
 
@@ -16,6 +17,7 @@ int health=8;
 String input;
 
 boolean GameState=false;
+boolean CaveState=false;
 
 boolean gameLoaded=false;
 boolean fileLoaded=false;
@@ -30,6 +32,9 @@ void setup()
   World=new GameWorld();
   
   Player=new Sprite();
+  
+  Cave=new Caves();
+  
   
   for(int l=0; l<monsters.length; l++)
   {
@@ -85,6 +90,20 @@ void draw()
     }
   }
   
+  if(CaveState==true)
+  {
+    GameState=false;
+    
+    Cave.Load();
+    
+    if(CaveState==true)
+    {
+      Cave.Run();
+    }
+  }
+  
+    
+  
   if(keyPressed==true)
   {
     if(key=='p' && GameState==true)
@@ -102,6 +121,14 @@ void draw()
       println("started");
       GameState=true;
       keyPressed=false;
+    }
+  }
+  
+  if(keyPressed==true)
+  {
+    if(key=='v')
+    {
+      CaveState=true;
     }
   }
 }
